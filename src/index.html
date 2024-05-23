@@ -1,13 +1,36 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+  <script type='text/javascript'>
+    // We want to set the base-href dynamically because we want only one single build for every customer.
+    // Inspired by https://stackoverflow.com/questions/38112891/angular-2-set-base-href-dynamically
+
+    // calculate base-href base on the current location, use the first segment of the url.
+    // this works well for paths like https://www.sdhosting.com/lwcustomer, https://www.sdhosting.com/lwcustomer
+    var base = '/' + document.location.pathname.split('/')[1] + '/';
+
+    // it does not work well if 
+    // * you do not use a subdirectory (just https://www.sdhosting.com)
+    // * you use nested routes (https://www.sdhosting.com/applications/lw)
+    // in such cases you can add exceptions here e.g.
+    // if (document.location.href.includes(https://www.mydomain.com)) base = '/'
+    // if (document.location.href.includes(lwevn)) base = '/apps/lwevn'
+
+    // such changes should be added to the source repository so that we do not loose them
+
+    document.write('<base href="' + base + '" />');
+  </script>
+  <!-- <base href="/"> -->
+
   <meta charset="utf-8">
   <title>NgBaseHref</title>
-  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>
