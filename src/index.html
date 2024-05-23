@@ -8,7 +8,11 @@
 
     // calculate base-href base on the current location, use the first segment of the url.
     // this works well for paths like https://www.sdhosting.com/lwcustomer, https://www.sdhosting.com/lwcustomer
-    var base = '/' + document.location.pathname.split('/')[1] + '/';
+    var segments = document.location.pathname.split('/');
+    var virtualDirectory = segments[1];
+    var locale = segments[2];
+
+    var base = `/${virtualDirectory}/${locale}/`;
 
     // it does not work well if 
     // * you do not use a subdirectory (just https://www.sdhosting.com)
